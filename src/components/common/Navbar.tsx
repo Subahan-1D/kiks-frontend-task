@@ -1,267 +1,103 @@
-// "use client";
-
-// import { useRef, useState } from "react";
-// import Link from "next/link";
-// import { Heart, Bell, User } from "lucide-react";
-// import { Sheet, SheetContent } from "@/components/ui/sheet";
-// import { IoMenu } from "react-icons/io5";
-// import mainLogo from "@/assets/logo/logo.jpg";
-
-// import { Button } from "../ui/button";
-// import Image from "next/image";
-// import { usePathname } from "next/navigation";
-// import { cn } from "@/lib/utils";
-// import { useSelector } from "react-redux";
-// import { RootState } from "@/redux/store";
-// import { notificationData } from "@/types/fakeData";
-
-// const navItems = [
-//   { href: "/", label: "Home", active: true },
-//   { href: "/property-list", label: "List Your Property" },
-//   { href: "/support", label: "Help and Support" },
-//   { href: "/explore-stays", label: "Explore Stays" },
-// ];
-
-// export default function Navbar() {
-//   const pathname = usePathname();
-
-//   const [open, setOpen] = useState<boolean>(false);
-
-//   const [isOpen, setIsOpen] = useState(false);
-//   const buttonRef = useRef<HTMLButtonElement>(null);
-//   const dropdownRef = useRef<HTMLDivElement>(null);
-
-//   const toggleDropdown = () => {
-//     setIsOpen(!isOpen);
-//   };
-//   const userRole = useSelector((state: RootState) => state?.auth?.user?.role);
-
-//   return (
-//     <header className="border-b border-gray-100 py-4">
-//       <div className="container">
-//         <div className="flex h-16 items-center justify-between">
-//           <div className="flex-shrink-0">
-//             {/* <Link href="/">
-//               <div className="w-[100px] h-[100px]">
-//                 <Image
-//                   src={mainLogo}
-//                   width={100}
-//                   height={100}
-//                   className="w-full h-full"
-//                   alt="mainlog"
-//                 />
-//               </div>
-//             </Link> */}
-//           </div>
-//           {/* Logo */}
-
-//           {/* Desktop Navigation - Show on md screens and up */}
-//           <nav className="hidden lg:flex space-x-8">
-//             {navItems.map((item) => {
-//               const isActive = pathname === item.href;
-
-//               return (
-//                 <Link
-//                   key={item.href}
-//                   href={item.href}
-//                   className={`inline-flex items-center px-1 pt-1 text-sm font-medium ${
-//                     isActive
-//                       ? "text-gray-900 font-bold border-b-2 border-gray-900"
-//                       : "text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
-//                   }`}
-//                 >
-//                   {item.label}
-//                 </Link>
-//               );
-//             })}
-//           </nav>
-
-//           {/* Right side icons - Show on md screens and up */}
-
-//           <div className="flex  items-center lg:space-x-6 md:space-x-6 space-x-3">
-//             <Link
-//               href={"/saved"}
-//               // type="button"
-//               className="p-1 rounded-full text-gray-500 hover:text-gray-900 focus:outline-none"
-//               aria-label="Favorites"
-//             >
-//               <Heart className="h-6 w-6" />
-//             </Link>
-//             <button
-//               ref={buttonRef}
-//               type="button"
-//               className="p-1 rounded-full text-gray-500 hover:text-gray-900 focus:outline-none"
-//               aria-label="Notifications"
-//               onClick={toggleDropdown}
-//             >
-//               <Bell className="h-6 w-6" />
-//             </button>
-
-//             {isOpen && (
-//               <>
-//                 {/* Overlay for mobile - helps with click outside detection */}
-//                 <div className="fixed inset-0 bg-black/5 z-40 md:hidden" />
-
-//                 {/* Notification dropdown */}
-//                 <div
-//                   ref={dropdownRef}
-//                   className="absolute top-[80px] right-[10px] w-72 sm:w-80 sm:right-[20px] md:top-[80px] md:right-[220px] lg:top-[60px] lg:right-[290px] mt-2 bg-white shadow-lg rounded-md z-50"
-//                 >
-//                   <div className="p-4 border-b border-gray-100">
-//                     <h2 className="text-lg font-semibold">Notifications</h2>
-//                   </div>
-//                   <div className="max-h-[70vh] overflow-y-auto">
-//                     {notificationData.map((notification) => (
-//                       <div
-//                         key={notification.id}
-//                         className={cn(
-//                           "p-4 border-b border-gray-100 hover:bg-gray-50",
-//                           !notification.read && "bg-gray-50"
-//                         )}
-//                       >
-//                         <div className="flex gap-3">
-//                           <div className="w-[50px] h-[40px] mt-1">
-//                             <Image
-//                               src={mainLogo}
-//                               width={50}
-//                               height={40}
-//                               className="w-full h-full"
-//                               alt="mainlog"
-//                             />
-//                           </div>
-//                           <div className="flex-1">
-//                             <p className="text-sm text-gray-700">
-//                               {notification.title}
-//                             </p>
-//                             <p className="text-xs text-gray-500 mt-1">
-//                               {notification.time}
-//                             </p>
-//                           </div>
-//                         </div>
-//                       </div>
-//                     ))}
-//                   </div>
-//                   {notificationData.length === 0 && (
-//                     <div className="p-4 text-center text-gray-500">
-//                       No notifications
-//                     </div>
-//                   )}
-//                 </div>
-//               </>
-//             )}
-//             <Link
-//               href={`${
-//                 userRole === "HOST"
-//                   ? "/host-profile"
-//                   : userRole === "GUEST"
-//                   ? "/user-profile"
-//                   : userRole === "SUPER_ADMIN"
-//                   ? "/admin/overview"
-//                   : "/login"
-//               }`}
-//               // href={"/"}
-//               className="p-1 rounded-full text-gray-500 hover:text-gray-900 focus:outline-none"
-//               aria-label="Account"
-//             >
-//               {" "}
-//               <User className="h-6 w-6" />{" "}
-//             </Link>
-//           </div>
-
-//           {/* Mobile menu button - Show on sm screens and down */}
-//           <div className="lg:hidden">
-//             <Button
-//               variant="ghost"
-//               size="icon"
-//               onClick={() => setOpen(true)}
-//               className="text-gray-500 hover:text-gray-900"
-//             >
-//               <IoMenu className="w-10" />
-//             </Button>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Mobile menu - Show on sm screens and down */}
-//       <Sheet open={open} onOpenChange={setOpen}>
-//         <SheetContent side="left" className="p-6 w-[300px]">
-//           <div className="flex flex-col space-y-4">
-//             {navItems.map((item) => (
-//               <Link
-//                 key={item.href}
-//                 href={item.href}
-//                 onClick={() => setOpen(false)}
-//                 className={`py-2 px-1 text-sm font-medium ${
-//                   item.active
-//                     ? "text-gray-900 border-l-2 border-gray-900 pl-3"
-//                     : "text-gray-500 hover:text-gray-700 pl-4"
-//                 }`}
-//               >
-//                 {item.label}
-//               </Link>
-//             ))}
-//           </div>
-//         </SheetContent>
-//       </Sheet>
-//     </header>
-//   );
-// }
-
-
 'use client';
 
-import { ShoppingCart, Search, User, Heart } from 'lucide-react';
+import { useState } from 'react';
+import { Search, User, ShoppingCart, ChevronDown, Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
 export function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <>
+      <nav className="sticky top-0 z-50 bg-white border-b shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
 
+            {/* Left - Mobile Menu Button */}
+            <div className="md:hidden">
+              <button onClick={() => setMobileOpen(true)}>
+                <Menu className="w-6 h-6" />
+              </button>
+            </div>
 
-          {/* Center Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
-              New Arrivals
-            </a>
-            <a href="#" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
-              Men
-            </a>
-            <a href="#" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
-              Women
-            </a>
-            <a href="#" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
-              Sale
-            </a>
-          </div>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="#" className="text-sm font-medium hover:text-blue-600 transition">
+                New Drops
+              </Link>
 
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <a href="/" className="text-2xl font-bold text-primary tracking-wide">
+              <div className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:text-blue-600 transition">
+                Men
+                <ChevronDown className="w-4 h-4" />
+              </div>
+
+              <div className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:text-blue-600 transition">
+                Women
+                <ChevronDown className="w-4 h-4" />
+              </div>
+            </div>
+
+            {/* Logo */}
+            <Link href="/" className="text-2xl font-bold tracking-wide">
               KICKS
-            </a>
+            </Link>
+
+            {/* Right Side Icons */}
+            <div className="flex items-center gap-4">
+              <Search className="w-5 h-5 cursor-pointer hover:text-blue-600 transition" />
+              <User className="w-5 h-5 cursor-pointer hover:text-blue-600 transition" />
+
+              <div className="relative">
+                <ShoppingCart className="w-5 h-5 cursor-pointer hover:text-blue-600 transition" />
+                <span className="absolute -top-2 -right-2 w-5 h-5 bg-amber-500 text-white text-xs rounded-full flex items-center justify-center">
+                  0
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Drawer */}
+      <div className={`fixed inset-0 z-40 transition ${mobileOpen ? 'visible' : 'invisible'}`}>
+        
+        {/* Overlay */}
+        <div
+          onClick={() => setMobileOpen(false)}
+          className={`absolute inset-0 bg-black/40 transition-opacity ${mobileOpen ? 'opacity-100' : 'opacity-0'}`}
+        />
+
+        {/* Drawer Panel */}
+        <div
+          className={`absolute left-0 top-0 h-full w-64 bg-white shadow-lg p-6 transform transition-transform ${
+            mobileOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div className="flex justify-between items-center mb-8">
+            <span className="text-xl font-bold">Menu</span>
+            <button onClick={() => setMobileOpen(false)}>
+              <X className="w-6 h-6" />
+            </button>
           </div>
 
-          {/* Right Side Icons */}
-          <div className="flex items-center gap-4">
-            <button className="p-2 hover:bg-muted rounded-lg transition-colors" aria-label="Search">
-              <Search className="w-5 h-5 text-foreground" />
-            </button>
-            <button className="p-2 hover:bg-muted rounded-lg transition-colors" aria-label="Wishlist">
-              <Heart className="w-5 h-5 text-foreground" />
-            </button>
-            <button className="p-2 hover:bg-muted rounded-lg transition-colors" aria-label="Account">
-              <User className="w-5 h-5 text-foreground" />
-            </button>
-            <button className="relative p-2 hover:bg-muted rounded-lg transition-colors" aria-label="Shopping cart">
-              <ShoppingCart className="w-5 h-5 text-foreground" />
-              <span className="absolute top-1 right-1 w-5 h-5 bg-accent text-accent-foreground text-xs rounded-full flex items-center justify-center font-bold">
-                0
-              </span>
-            </button>
+          <div className="flex flex-col gap-6 text-lg font-medium">
+            <Link href="#" onClick={() => setMobileOpen(false)}>
+              New Drops
+            </Link>
+
+            <div className="flex items-center justify-between">
+              <span>Men</span>
+              <ChevronDown className="w-4 h-4" />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <span>Women</span>
+              <ChevronDown className="w-4 h-4" />
+            </div>
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 }
