@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ReduxProvider from "@/redux/provider/ReduxProvider";
 import { Toaster } from "sonner";
+import { Navbar } from "@/components/common/Navbar";
+import Footer from "@/components/common/Footer";
 
 export const metadata: Metadata = {
   title: "Kiks",
@@ -27,7 +29,11 @@ export default function RootLayout({
       </head>
       <body className="antialiased font-inter">
         <Toaster position="bottom-right" richColors />
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );

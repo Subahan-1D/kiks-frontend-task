@@ -22,14 +22,14 @@ export function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              <Link href="#" className="text-sm font-medium hover:text-blue-600 transition">
+              <Link href="/" className="text-sm font-medium hover:text-blue-600 transition">
                 New Drops
               </Link>
 
-              <div className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:text-blue-600 transition">
+              <Link href={"/men"} className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:text-blue-600 transition">
                 Men
                 <ChevronDown className="w-4 h-4" />
-              </div>
+              </Link>
 
               <div className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:text-blue-600 transition">
                 Women
@@ -61,7 +61,7 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       <div className={`fixed inset-0 z-40 transition ${mobileOpen ? 'visible' : 'invisible'}`}>
-        
+
         {/* Overlay */}
         <div
           onClick={() => setMobileOpen(false)}
@@ -70,9 +70,8 @@ export function Navbar() {
 
         {/* Drawer Panel */}
         <div
-          className={`absolute left-0 top-0 h-full w-64 bg-white shadow-lg p-6 transform transition-transform ${
-            mobileOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
+          className={`absolute left-0 top-0 h-full w-64 bg-white shadow-lg p-6 transform transition-transform ${mobileOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
         >
           <div className="flex justify-between items-center mb-8">
             <span className="text-xl font-bold">Menu</span>
