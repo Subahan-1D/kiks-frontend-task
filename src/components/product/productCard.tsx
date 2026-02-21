@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useGetProductsQuery } from '@/redux/features/product/productApi';
 import { useState } from 'react';
-import CustomPaginations from './CustomPaginations';
+import CustomPaginations from '../common/CustomPaginations';
 
 export function ProductSection() {
 
@@ -47,17 +47,17 @@ export function ProductSection() {
                             key={product.id}
                             className="group relative flex flex-col rounded-xl bg-card overflow-hidden border border-border transition-all hover:shadow-xl"
                         >
-                            <div className="absolute top-2 left-2 z-20">
+                            <div className="absolute top-1 left-1 z-20">
                                 <Badge
-                                    variant="default"
-                                    className="bg-blue-600 hover:bg-blue-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-md shadow-sm"
+                                    style={{ borderRadius: "255px 0px 255px 0px" }}
+                                    className="bg-blue-600  text-white text-xs font-medium px-3 py-1  shadow-sm"
                                 >
                                     NEW
                                 </Badge>
                             </div>
 
                             <div className="relative h-64 w-full bg-muted overflow-hidden">
-                                {product.images?.length > 0 && (      
+                                {product.images?.length > 0 && (
                                     <Image
                                         src={product.images[0]}
                                         alt={product.title}

@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-black text-gray-300 rounded-2xl mt-10">
       {/* Newsletter - blue section */}
-      <div className="bg-bprimary py-16 px-5 sm:px-6 lg:px-8 text-white rounded-md">
+      <div className="bg-bprimary py-16 px-5 sm:px-6 lg:px-8 text-white rounded-2xl">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
             {/* Left: Main content + form */}

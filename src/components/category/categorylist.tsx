@@ -86,8 +86,9 @@ export default function CategoryList() {
                   <h3 className="text-lg font-semibold text-white">
                     {cat.name.toUpperCase()}
                   </h3>
-
-                  <ArrowUpRight className="text-white" size={18} />
+<div className="flex items-center justify-center w-8 h-8 border border-black rounded-md">
+  <ArrowUpRight className="text-white" size={18} />
+</div>
                 </div>
               </div>
             </Link>
