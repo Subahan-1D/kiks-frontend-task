@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import { Navbar } from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 
+
 export const metadata: Metadata = {
   title: "Kiks",
   // description: "Admin Dashboard",

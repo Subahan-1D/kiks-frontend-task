@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 // import { registerFormSchema } from "../form/formSchema";
-import Image from "next/image";
+
 import { registerFormSchema } from "@/lib/formSchema";
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -53,13 +53,13 @@ export default function Register() {
         {/* Logo */}
         <Link href={"/"} className="mb-14">
           <div className="">
-            <Image
+            {/* <Image
               src={mainLogo}
               width={70}
               height={70}
               className="w-full h-full object-cover"
               alt="mainlog"
-            />
+            /> */}
           </div>
         </Link>
 
@@ -276,7 +276,7 @@ export default function Register() {
 
         {/* Footer */}
         <div className="text-center text-xs text-gray-500 w-full">
-          © 2025 
+          © 2026 KICKS. All rights reserved. |{" "}
           <Link
             href="/terms"
             className="text-bprimary hover:text-bprimary/80"

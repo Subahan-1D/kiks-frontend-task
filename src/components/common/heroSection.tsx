@@ -12,7 +12,7 @@ export function HeroSection() {
       <section className="py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-6">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
+            <h1 className=" sm:text-6xl lg:text-9xl md:text-7xl font-bold tracking-tight">
               <span className="text-primary">DO IT</span>{' '}
               <span className="text-[#4A69E2]">RIGHT</span>
             </h1>

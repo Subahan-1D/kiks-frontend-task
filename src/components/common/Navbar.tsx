@@ -21,25 +21,28 @@ export function Navbar() {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-8 ">
               <Link href="/" className="text-sm font-medium hover:text-blue-600 transition">
-                New Drops
+                New Drops 🔥
               </Link>
 
-              <Link href={"/men"} className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:text-blue-600 transition">
+              <Link href={"/"} className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:text-blue-600 transition">
                 Men
                 <ChevronDown className="w-4 h-4" />
               </Link>
 
-              <div className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:text-blue-600 transition">
+              <Link href={"/"} className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:text-blue-600 transition">
                 Women
                 <ChevronDown className="w-4 h-4" />
-              </div>
+              </Link>
             </div>
 
             {/* Logo */}
-            <Link href="/" className="text-2xl font-bold tracking-wide">
+            {/* <Link href="/" className="text-2xl font-bold tracking-wide">
               KICKS
+            </Link> */}
+            <Link href={"/"} className="text-2xl font-black tracking-tight text-black ">
+              KICKS<sup className="text-xs align-super"></sup>
             </Link>
 
             {/* Right Side Icons */}
@@ -80,9 +83,9 @@ export function Navbar() {
             </button>
           </div>
 
-          <div className="flex flex-col gap-6 text-lg font-medium">
+          <div className="flex flex-col gap-6 text-3xl font-medium">
             <Link href="#" onClick={() => setMobileOpen(false)}>
-              New Drops
+              New Drops 🔥
             </Link>
 
             <div className="flex items-center justify-between">

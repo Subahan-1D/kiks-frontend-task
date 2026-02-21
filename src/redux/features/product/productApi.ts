@@ -9,13 +9,19 @@ export type Product = {
   images: string[];
 };
 
+export type Category = {
+  id: number;
+  name: string;
+};
+
 export const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query<Product[], void>({
       query: () => "https://api.escuelajs.co/api/v1/products",
       providesTags: ["destination"],
     }),
+ 
   }),
 });
 
-export const { useGetProductsQuery } = productApi;
+export const { useGetProductsQuery} = productApi;

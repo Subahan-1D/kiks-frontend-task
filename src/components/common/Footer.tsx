@@ -1,286 +1,190 @@
-"use client";
+"use client"
+// components/Footer.tsx
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
-import Link from "next/link";
-import { ArrowRightIcon, SearchIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import mainLogo from "@/assets/logo/logo.jpg";
-import Image from "next/image";
-import { Input } from "../ui/input";
-import { toast } from "sonner";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import { footerData } from "@/types/fakeData";
-
-const subscribeSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address" }),
-});
-
-type SubscribeFormValues = z.infer<typeof subscribeSchema>;
-
-// Footer data organized as JSON objects
+import Link from "next/link"
+import { BsInstagram, BsTiktok, BsTwitter } from "react-icons/bs"
+import { FaFacebook } from "react-icons/fa"
 
 export default function Footer() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<SubscribeFormValues>({
-    resolver: zodResolver(subscribeSchema),
-  });
-  const role = useSelector((state: RootState) => state.auth.user?.role);
-  console.log("my role", role);
-  const onSubmit = async (data: SubscribeFormValues) => {
-    try {
-      console.log("Subscription email:", data.email);
-      // Here you would typically send this to your API
-      // await fetch('/api/subscribe', { method: 'POST', body: JSON.stringify(data) })
-      reset();
-      toast.success("Thank you for subscribing!");
-    } catch (e) {
-      console.log(e);
-      toast.error("Something went wrong.");
-    }
-  };
-
   return (
-    <footer className="bg-[#f5f5f5] pt-12 ">
-      <div className="container mx-auto pb-6">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          {/* Company Info */}
-          <div className="col-span-1">
-            <Link href={"/"}>
-              <div className="w-[100px] h-[100px]">
-                <Image
-                  src={mainLogo}
-                  width={100}
-                  height={100}
-                  className="w-full h-full"
-                  alt="mainlog"
+    <footer className="bg-black text-gray-300 rounded-2xl mt-10">
+      {/* Newsletter - blue section */}
+      <div className="bg-bprimary py-16 px-5 sm:px-6 lg:px-8 text-white rounded-md">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+            {/* Left: Main content + form */}
+            <div className="text-center lg:text-left max-w-3xl">
+              <h2 className="mb-4 text-2xl font-black tracking-tight sm:text-xl lg:text-3xl">
+                JOIN OUR <span className="text-yellow-400">KICKSPLUS</span> <br /> CLUB
+                <br className="sm:hidden" />
+                & GET <span className="text-yellow-400">15%</span> OFF
+              </h2>
+
+              <p className="mb-8 text-xl text-blue-100 sm:text-xl">
+                Signup for free to join the community
+              </p>
+
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="mx-auto flex max-w-lg flex-col gap-4 sm:flex-row sm:gap-3"
+              >
+                <Input
+                  type="email"
+                  placeholder="Email address"
+                  required
+                  className="h-12 bg-white/95 text-base placeholder:text-gray-500 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400"
                 />
-              </div>
-            </Link>
-            <p className="text-sm text-gray-600 mb-6">
-              {footerData.companyInfo.description}
-            </p>
-            <div className="space-y-2">
-              {footerData.companyInfo.socialLinks.map((link, index) => {
-                const Icon = link.icon;
-                return (
-                  <div key={index} className="flex items-center">
-                    <Icon className="h-5 w-5 mr-2" />
-                    <span className="text-sm text-gray-600">{link.text}</span>
-                  </div>
-                );
-              })}
+                <Button
+                  type="submit"
+                  className="h-12 bg-black px-8 text-base font-semibold text-white hover:bg-gray-900 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-blue-600"
+                >
+                  SUBMIT
+                </Button>
+              </form>
+            </div>
+
+            {/* Right: Brand mark (visible on larger screens) */}
+            <div className="hidden lg:block text-4xl font-black mt-14 tracking-tight text-white/90 lg:text-5xl xl:text-6xl ">
+              KICKS
+              <sup className="align-super text-base font-bold text-white/80">®</sup>
             </div>
           </div>
 
-          {/* Navigation Sections */}
-          {/* <footer className="grid grid-cols-1 md:grid-cols-3 gap-8"> */}
-          {/* Quick Menu Section */}
-          <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">
-              Quick Menu
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/"
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/explore-stays"
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  Explore Stays
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/property-list"
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  List Your Property
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/support"
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  Help and Support
-                </Link>
-              </li>
-            </ul>
+          {/* Mobile-only brand mark */}
+          <div className="mt-10 text-center text-4xl font-black tracking-tight text-white/90 lg:hidden">
+            KICKS
+            <sup className="align-super text-base font-bold text-white/80">®</sup>
           </div>
+        </div>
+      </div>
 
-          {/* Information Section */}
-          <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">
-              Information
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href={`${
-                    role === "HOST"
-                      ? "/host-profile"
-                      : role === "GUEST"
-                      ? "/user-profile"
-                      : role === "SUPER_ADMIN"
-                      ? "/admin/overview"
-                      : "/login"
-                  }`}
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  My Account
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/login"
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  Login
-                </Link>
-              </li>
-              {/* {role} */}
-              <li>
-                <Link
-                  href={`${
-                    role === "HOST"
-                      ? "/hostdashboard/allProperties"
-                      : role === "GUEST"
-                      ? "/user-profile/currentBooking"
-                      : role === "SUPER_ADMIN"
-                      ? "/admin/properties"
-                      : "/login"
-                  }`}
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  My Properties
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/saved"
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  Saved
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Service Section */}
-          <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">
-              Service
-            </h3>
-            <ul className="space-y-3">
-              {role === "HOST" && (
-                <>
-                  <li>
-                    <Link
-                      href="/pricing"
-                      className="text-sm text-gray-600 hover:text-gray-900"
-                    >
-                      Basic Plan
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/pricing"
-                      className="text-sm text-gray-600 hover:text-gray-900"
-                    >
-                      Standard Plan
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/pricing"
-                      className="text-sm text-gray-600 hover:text-gray-900"
-                    >
-                      Premium Plan
-                    </Link>
-                  </li>
-                </>
-              )}
-              <li>
-                <Link
-                  href="/privacy-policy"
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/termsAndCondition"
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  Terms & Conditions
-                </Link>
-              </li>
-            </ul>
-          </div>
-          {/* </footer> */}
-
-          {/* Subscribe */}
-          <div className="col-span-1 ">
-            <div className="max-w-md">
-              <h3 className="text-sm font-semibold text-gray-900 mb-2">
-                {footerData.subscribe.title}
-              </h3>
-              <p className="text-sm text-gray-600 mb-4">
-                {footerData.subscribe.description}
+      {/* Main footer links */}
+      <div className="border-t border-gray-900">
+        <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {/* About */}
+            <div>
+              <h3 className="mb-6 text-lg font-semibold text-[#FFA52F]">About us</h3>
+              <p className="mb-4 text-gray-400">
+                We are the biggest hyperstore in the universe. We got you all cover with our exclusive collections and latest drops.
               </p>
-              <form onSubmit={handleSubmit(onSubmit)} className="flex">
-                <div className="*:not-first:mt-2">
-                  <div className="relative">
-                    <Input
-                      className="peer ps-9 pe-9"
-                      placeholder="Search..."
-                      {...register("email")}
-                      type="search"
-                    />
-                    {errors.email && (
-                      <p className="mt-1 text-xs text-red-600">
-                        {errors.email.message}
-                      </p>
-                    )}
-                    <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
-                      <SearchIcon size={16} />
-                    </div>
-                    <button
-                      className="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
-                      aria-label="Submit search"
-                      type="submit"
-                    >
-                      <ArrowRightIcon size={16} aria-hidden="true" />
-                    </button>
-                  </div>
-                </div>
-              </form>
+            </div>
+
+            {/* Categories */}
+            <div>
+              <h3 className="mb-6 text-lg font-semibold text-[#FFA52F]">Categories</h3>
+              <ul className="space-y-3 text-gray-400">
+                <li>
+                  <Link href="/runners" className="hover:text-white transition-colors">
+                    Runners
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/basketball" className="hover:text-white transition-colors">
+                    Basketball
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/outdoor" className="hover:text-white transition-colors">
+                    Outdoor
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/golf" className="hover:text-white transition-colors">
+                    Golf
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/hiking" className="hover:text-white transition-colors">
+                    Hiking
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h3 className="mb-6 text-lg font-semibold text-[#FFA52F]">Company</h3>
+              <ul className="space-y-3 text-gray-400">
+                <li>
+                  <Link href="/about" className="hover:text-white transition-colors">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="hover:text-white transition-colors">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blogs" className="hover:text-white transition-colors">
+                    Blogs
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Follow us */}
+            <div>
+              <h3 className="mb-6 text-lg font-semibold text-[#FFA52F]">Follow us</h3>
+              <div className="flex gap-6 text-xl">
+                <a
+                  href="https://www.facebook.com/subahan.islam.758"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                  aria-label="Instagram"
+                >
+                  <FaFacebook></FaFacebook>
+                </a>
+                <a
+                  href="https://www.instagram.com/subahanislam7749/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                  aria-label="Instagram"
+                >
+                  <BsInstagram></BsInstagram>
+                </a>
+                <a
+                  href="https://x.com/Subahan1323225"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                  aria-label="Instagram"
+                >
+                  <BsTwitter></BsTwitter>
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                  aria-label="X"
+                >
+                  <BsTiktok></BsTiktok>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Copyright */}
-        {/* <div className="mt-12 pt-8 border-t border-gray-200">
-          <p className="text-center text-sm text-gray-500">©2023 All Rights are reserved</p>
-        </div> */}
       </div>
-      <div className="w-full bg-black text-white">
-        <p className="text-center py-2">©2025 All Rights are reserved️ </p>
+
+      {/* Bottom bar */}
+      <div className="border-t border-gray-900 bg-black/60 py-6 text-center text-sm text-gray-500 md:text-left">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <div className="text-2xl font-black tracking-tight text-white">
+              KICKS<sup className="text-xs align-super">®</sup>
+            </div>
+            <div>
+              © {new Date().getFullYear()} KICKS. All Rights Reserved.
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
-  );
+  )
 }

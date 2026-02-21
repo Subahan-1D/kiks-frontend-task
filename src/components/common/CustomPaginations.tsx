@@ -12,20 +12,17 @@ interface PaginationsProps {
   startIndex: number
   onPageChange: (page: number) => void
 }
-
 export default function CustomPaginations({
   currentPage,
   totalPages,
-  itemsPerPage,
-  totalItems,
-  startIndex,
+  
   onPageChange,
 }: PaginationsProps) {
   return (
     <div>
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-sm text-black  order-2 sm:order-1">
-          Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, totalItems)} of {totalItems} users
+         
         </div>
         <Pagination className="order-1 sm:order-2 text-black">
           <PaginationContent>
@@ -65,7 +62,7 @@ export default function CustomPaginations({
               if (page === currentPage - 2 || page === currentPage + 2) {
                 return (
                   <PaginationItem key={`ellipsis-${page}`}>
-                    <span className="px-4">...</span>
+                    <span className="px-2">...</span>
                   </PaginationItem>
                 )
               }
@@ -76,7 +73,7 @@ export default function CustomPaginations({
             <PaginationItem>
               <Button
                 onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-                className={`px-2 bg-transparent border text-black ${
+                className={`px-1 bg-transparent border text-black ${
                   currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"
                 } hover:text-white hover:bg-primary`}
               >

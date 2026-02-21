@@ -5,13 +5,14 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useGetProductsQuery } from '@/redux/features/product/productApi';
 import { useState } from 'react';
+import CustomPaginations from './CustomPaginations';
 
 export function ProductSection() {
 
     const { data: products = [], isLoading, isError } = useGetProductsQuery();
 
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 16;
+    const productsPerPage = 12;
 
     // pagination logic
     const totalPages = Math.ceil(products.length / productsPerPage);
@@ -40,20 +41,23 @@ export function ProductSection() {
                 </div>
 
                 {/* Products */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                     {currentProducts.map((product) => (
                         <div
                             key={product.id}
                             className="group relative flex flex-col rounded-xl bg-card overflow-hidden border border-border transition-all hover:shadow-xl"
                         >
-                            <div className="absolute top-1 left-1 z-10">
-                                <Badge className="bg-blue-700 text-white text-xs px-2 py-1 rounded-md">
+                            <div className="absolute top-2 left-2 z-20">
+                                <Badge
+                                    variant="default"
+                                    className="bg-blue-600 hover:bg-blue-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-md shadow-sm"
+                                >
                                     NEW
                                 </Badge>
                             </div>
 
                             <div className="relative h-64 w-full bg-muted overflow-hidden">
-                                {product.images?.length > 0 && (
+                                {product.images?.length > 0 && (      
                                     <Image
                                         src={product.images[0]}
                                         alt={product.title}
@@ -64,20 +68,18 @@ export function ProductSection() {
                             </div>
 
                             <div className="flex flex-col gap-3 p-4">
-                                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                                    {product.title}
-                                </p>
 
-                                <h3 className="text-sm font-bold leading-tight">
-                                    {product.description?.slice(0, 25)}...
+
+                                <h3 className="text-sm font-bold leading-tight uppercase">
+                                    {product.title}
                                 </h3>
 
-                                <div className="flex items-center justify-between pt-2 border-t">
-                                    <span className="text-sm font-bold">
-                                        ${product.price}
-                                    </span>
-                                    <Button size="sm" variant="outline" className="text-xs font-semibold">
-                                        View Product
+                                <div className="pt-2 w-full ">
+                                    <Button
+                                        size="default"
+                                        className="w-full text-xs font-semibold bg-[#232321]"
+                                    >
+                                        <span className='uppercase  text-white'>View Product </span> - <span className='text-[#FFA52F]'> $ {product.price}</span>
                                     </Button>
                                 </div>
                             </div>
@@ -86,20 +88,16 @@ export function ProductSection() {
                 </div>
 
                 {/* Pagination */}
-                <div className="flex justify-center mt-10 gap-2 flex-wrap">
-                    {[...Array(totalPages)].map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setCurrentPage(index + 1)}
-                            className={`px-2 py-1 border rounded-md text-sm font-semibold transition
-                                ${currentPage === index + 1
-                                    ? 'bg-black text-white'
-                                    : 'bg-white hover:bg-gray-100'
-                                }`}
-                        >
-                            {index + 1}
-                        </button>
-                    ))}
+                {/* Pagination */}
+                <div className="mt-10">
+                    <CustomPaginations
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        itemsPerPage={productsPerPage}
+                        totalItems={products.length}
+                        startIndex={startIndex}
+                        onPageChange={(page) => setCurrentPage(page)}
+                    />
                 </div>
 
             </div>
