@@ -177,5 +177,5 @@ Commits are structured and meaningful, such as:
 
 ## 👨‍💻 Author
 
-Md.Subahan Ali
-Frontend Developer  
+Name  : Md.Subahan Ali
+Frontend Developer 
