@@ -2,7 +2,7 @@
 import { Star } from "lucide-react"; // For star icons (install lucide-react if needed)
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import Image from "next/image";
 
 const fakeReviews = [

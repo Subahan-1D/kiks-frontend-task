@@ -9,7 +9,7 @@ import { EyeOff, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AnimationWrapper from "../common/AnimationWrapper";
-import mainLogo from "@/assets/logo/logo.jpg";
+
 
 import {
   Form,
