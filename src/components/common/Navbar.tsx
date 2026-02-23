@@ -3,10 +3,17 @@
 import { useState } from 'react';
 import { Search, User, ShoppingCart, ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
-
+import { useSelector } from "react-redux";
+import type { RootState } from "@/redux/store";
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
+const totalQuantity = cartItems.reduce(
+  (total, item) => total + item.quantity,
+  0
+);
   return (
     <>
       <nav className="sticky top-0 z-50 bg-white border-b shadow-sm">
@@ -53,7 +60,7 @@ export function Navbar() {
               <div className="relative">
                 <ShoppingCart className="w-5 h-5 cursor-pointer hover:text-blue-600 transition" />
                 <span className="absolute -top-2 -right-2 w-5 h-5 bg-amber-500 text-white text-xs rounded-full flex items-center justify-center">
-                  0
+                 {totalQuantity}
                 </span>
               </div>
             </div>

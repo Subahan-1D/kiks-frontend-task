@@ -1,6 +1,5 @@
 import baseApi from "@/redux/api/baseApi";
 
-
 export type Product = {
   id: number;
   title: string;
@@ -20,8 +19,11 @@ export const productApi = baseApi.injectEndpoints({
       query: () => "https://api.escuelajs.co/api/v1/products",
       providesTags: ["destination"],
     }),
- 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getProductById: builder.query<any, number>({
+      query: (id) => `https://api.escuelajs.co/api/v1/products/${id}`,
+    }),
   }),
 });
 
-export const { useGetProductsQuery} = productApi;
+export const { useGetProductsQuery, useGetProductByIdQuery } = productApi;

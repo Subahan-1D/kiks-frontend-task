@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useGetProductsQuery } from '@/redux/features/product/productApi';
 import { useState } from 'react';
 import CustomPaginations from '../common/CustomPaginations';
+import Link from 'next/link';
 
 export function ProductSection() {
 
@@ -23,7 +24,14 @@ export function ProductSection() {
     const currentProducts = products.slice(startIndex, endIndex);
 
     if (isLoading) {
-        return <p className="text-center py-10 text-lg">Loading products...</p>;
+        return <p className="text-center py-10 text-lg"><span className="loading loading-spinner text-primary"></span>
+            <span className="loading loading-spinner text-secondary"></span>
+            <span className="loading loading-spinner text-accent"></span>
+            <span className="loading loading-spinner text-neutral"></span>
+            <span className="loading loading-spinner text-info"></span>
+            <span className="loading loading-spinner text-success"></span>
+            <span className="loading loading-spinner text-warning"></span>
+            <span className="loading loading-spinner text-error"></span></p>;
     }
 
     if (isError) {
@@ -62,8 +70,10 @@ export function ProductSection() {
                                         src={product.images[0]}
                                         alt={product.title}
                                         fill
+                                        unoptimized
                                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
+
                                 )}
                             </div>
 
@@ -79,7 +89,7 @@ export function ProductSection() {
                                         size="default"
                                         className="w-full text-xs font-semibold bg-[#232321]"
                                     >
-                                        <span className='uppercase  text-white'>View Product </span> - <span className='text-[#FFA52F]'> $ {product.price}</span>
+                                        <Link href={`/product/${product.id}`} className='uppercase  text-white'>View Product </Link> - <span className='text-[#FFA52F]'> $ {product.price}</span>
                                     </Button>
                                 </div>
                             </div>
